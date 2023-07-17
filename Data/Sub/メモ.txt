@@ -1,0 +1,57 @@
+シミュレーション：
+
+223ODでなく47ODを対象にする
+東京、関西、北部九州の3ODのみ考えている？
+
+18…羽田、成田
+25…関西国際、伊丹、神戸、南紀白浜
+37…福岡、北九州、南紀白浜
+
+それぞれでのxijkとそれを合算したODijのデータが必要
+xijkの取り方が変わってきている⇒エアライン別のデータを合算
+
+
+・国会図書館で手を抜いた（というか予見できなかった）のが災いして伊丹と関空のエアラインデータが丸まっている
+ということに気づいた。これはさすがに修正しないといけなさそう
+成田と羽田も同様だった。
+
+
+## JAL
+data3 <- data2
+# s[3]が所要時間、s[2]が費用←内生変数
+
+## Write functions
+## prob is a function which returns Pr
+prob <- function(a){
+  exputility <- rep(0, nrow(data3))
+  sumexputility <- rep(0, nrow(data3))
+  for(k in 1:nrow(data3)){
+    exputility[k] <- (a*exp(utilitypar[1] + utilitypar[2]*data3$所要時間[k] + utilitypar[3]*Price[k]
+                            + utilitypar[4]*log(Frequency[k]) + utilitypar[5]*data3$滞在可能時間[k]
+                            + utilitypar[6]*data3$アクセシビリティ[k] + utilitypar[7]*data3$鉄道ダミー[k]
+                            + utilitypar[8]*data3$エアライン参入数[k]))
+  }
+  sumexputility <- data.frame(i = data3$i, j = data3$j, exputility = exputility)
+  sumexputility <- sumexputility %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sumexputility = sum(exputility)) %>% 
+    dplyr::ungroup()
+  sumexputility <- sumexputility$sumexputility
+  sumexputility <- as.numeric(sumexputility)
+  output <- exputility/sumexputility
+  return(output)
+}
+
+## Define vectors of endogenous variables called Price and Frequency
+Price <- data3$費用 # As a initial value we give real data
+Frequency <- data3$航空便数
+Pricerenewal <- rep(0, nrow(data3))
+Frequencyrenewal <- rep(0, nrow(data3))
+
+while(abs(Frequency - Frequencyrenewal) < 1){
+  demand <- 
+}
+
+
+
+

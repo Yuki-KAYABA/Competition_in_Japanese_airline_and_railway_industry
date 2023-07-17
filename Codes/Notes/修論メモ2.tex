@@ -1,0 +1,70 @@
+\documentclass{jsarticle}
+\usepackage{amsmath}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{float}
+\begin{document}
+\title{修論進捗メモ}
+\author{萱場　悠貴}
+\maketitle
+
+\section{2018/12/21発表}
+\subsection{効用関数パラメータ}
+
+一便あたり座席数と一便あたり貨物と所要時間を新たに説明変数として加えた。また、費用と観測できない品質との間に生じる内生性の問題に対処するために操作変数推定を行う。操作変数として用いるのは費用以外の説明変数とエアライン参入数、滞在可能時間、路線距離、一便あたり超過手荷物である。
+
+
+表1は最終的な効用関数パラメータの推定結果である。内生性を考慮しないOLS推定では費用の係数が正となっており、符号条件と一致しない。一方IV推定においては費用の係数が負となっており、かつ他の変数の係数推定値も符号条件と一致している。
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: 木, 12 20, 2018 - 20:01:42
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{y} \\ 
+ & OLS & IV \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ 費用 & 0.0001$^{**}$ & $-$0.0003$^{***}$ \\ 
+  & (0.00004) & (0.00005) \\ 
+  log(航空便数) & 0.159 & 0.078 \\ 
+  & (0.129) & (0.129) \\ 
+  アクセシビリティ & $-$0.030$^{***}$ & $-$0.033$^{***}$ \\ 
+  & (0.002) & (0.002) \\ 
+  鉄道ダミー & 11.422$^{***}$ & 7.823$^{***}$ \\ 
+  & (1.163) & (1.191) \\ 
+  一便あたり座席数 & 0.009$^{***}$ & 0.015$^{***}$ \\ 
+  & (0.002) & (0.002) \\ 
+  一便あたり貨物 & 0.002$^{***}$ & 0.002$^{***}$ \\ 
+  & (0.0003) & (0.0003) \\ 
+  所要時間 & $-$0.024$^{***}$ & $-$0.011$^{***}$ \\ 
+  & (0.001) & (0.002) \\ 
+  Constant & $-$2.521$^{**}$ & 1.642 \\ 
+  & (1.176) & (1.215) \\ 
+ \hline \\[-1.8ex] 
+Observations & 2,588 & 2,588 \\ 
+R$^{2}$ & 0.601 & 0.606 \\ 
+Adjusted R$^{2}$ & 0.600 & 0.604 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+\subsection{シミュレーション}
+
+\subsection{注釈}
+\begin{itemize} %点を打つ%
+
+\item 仮データ
+
+関西－函館のデータをとってくるの忘れたので仮のデータを入れている。早急に修正すべし（「航空データ」と「airline_revised.csv」の両方）。
+
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,6 @@
+"0","knitr::opts_chunk$set(echo = TRUE, eval = FALSE, cache = TRUE, "
+"0","                      root.dir = rprojroot::find_rstudio_root_file())"
+"0","## Library"
+"0","library(magrittr)"
+"0","library(tidyr)"
+"0",""

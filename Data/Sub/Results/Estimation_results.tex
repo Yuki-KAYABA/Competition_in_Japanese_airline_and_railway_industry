@@ -1,0 +1,13 @@
+%latex.default(coef, file = "C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/Estimation_results.tex",     caption = "推定結果", where = "h", col.just = rep("r", dim(coef)[2]))%
+\begin{table}[h]
+\caption{推定結果\label{coef}} 
+\begin{center}
+\begin{tabular}{lrrrrr}
+\hline\hline
+\multicolumn{1}{l}{coef}&\multicolumn{1}{c}{定数項}&\multicolumn{1}{c}{費用}&\multicolumn{1}{c}{log(航空便数)}&\multicolumn{1}{c}{アクセシビリティ}&\multicolumn{1}{c}{鉄道ダミー}\tabularnewline
+\hline
+OLS&1.4962&-0.0004&0.6485&-0.0393&6.6077\tabularnewline
+IV&3.9594&-0.0006&0.6813&-0.0421&5.6476\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}

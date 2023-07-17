@@ -1,0 +1,1 @@
+Pr1 <- prob(datalie2$alpha)

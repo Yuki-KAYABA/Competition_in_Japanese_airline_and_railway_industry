@@ -1,0 +1,274 @@
+---
+title: "Master_Thesis_Utility_Analysis"
+author: "Yuki KAYABA"
+date: '2023-06-21'
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
+#output_dir: docs
+#bookdown::gitbook: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, cache = TRUE, 
+                      root.dir = rprojroot::find_rstudio_root_file())
+library(bookdown)
+library(magrittr)
+library(tidyverse)
+library(MASS)
+library(xtable)
+library(AER)
+library(Hmisc, stargazer)
+library(stargazer)
+```
+
+# Read Data
+
+Read data. Note that we use data gathered and cleaned at the time when I completed my master thesis.
+
+```{r read data}
+rm(list = ls())
+
+## Airline Data
+dataframe.airline <- read.csv("Data/Main/dataframe_airline.csv", 
+                              header = T, fileEncoding = "shift-JIS")
+airline <- read.csv("Data/Main/airline.csv", 
+                    header = T, fileEncoding = "shift-JIS")
+accessibility.airport <- read.csv("Data/Main/accessibility_airport.csv", 
+                                  header = T, fileEncoding = "shift-JIS")
+OD.207 <- read.csv("Data/Main/207OD.csv", 
+                   header = T, fileEncoding = "shift-JIS")
+
+## Railway Data
+dataframe.railway <- read.csv("Data/Main/dataframe_railway.csv", 
+                              header = T, fileEncoding = "shift-JIS")
+railway <- read.csv("Data/Main/railway.csv", 
+                    header = T, fileEncoding = "shift-JIS")
+railwaycost <- read.csv("Data/Main/railwaycost.csv", 
+                        header = T, fileEncoding = "shift-JIS")
+accessibility.station <- read.csv("Data/Main/accessibility_station.csv", 
+                                  header = T, fileEncoding = "shift-JIS")
+
+## Data for IV
+airline.as.IV <- read.csv("Data/Main/airline_updated.csv", 
+                          header = T, fileEncoding = "shift-JIS")
+airport.number <- read.csv("Data/Main/airportNo47.csv", 
+                           header = T, fileEncoding = "shift-JIS")
+```
+
+```{r make airline and railway data respectively}
+## Combine airports
+airline <- airline %>% 
+  ## Merge fringe airports into major ones
+  dplyr::mutate(空港i = case_when(空港i == "成田" ~ "羽田",
+                                空港i == "伊丹" ~ "関西国際", 
+                                空港i == "南紀白浜" ~ "関西国際",
+                                空港i == "神戸" ~ "関西国際",
+                                空港i == "北九州" ~ "福岡", 
+                                空港i == "佐賀" ~ "福岡",
+                                空港i == "中部" ~ "名古屋",
+                                空港i == "小牧" ~ "名古屋",
+                                TRUE ~ 空港i),
+                空港j = case_when(空港j == "成田" ~ "羽田",
+                                空港j == "伊丹" ~ "関西国際", 
+                                空港j == "南紀白浜" ~ "関西国際",
+                                空港j == "神戸" ~ "関西国際",
+                                空港j == "北九州" ~ "福岡", 
+                                空港j == "佐賀" ~ "福岡",
+                                空港j == "中部" ~ "名古屋",
+                                空港j == "小牧" ~ "名古屋",
+                                TRUE ~ 空港j)) %>% 
+  # Fares are translated to one-way
+  dplyr::mutate(費用 = 費用 / 2) %>% 
+  # Combine ODs
+  dplyr::group_by(空港i, 空港j) %>% 
+  dplyr::mutate(i = min(i),
+                j = min(j),
+                費用 = sum(航空便数 * 費用) / sum(航空便数), ## Weighted Mean
+                所要時間 = sum(航空便数 * 所要時間) / sum(航空便数), ## Weighted Mean
+                航空便数 = 365 * sum(航空便数), 
+                滞在可能時間 = max(滞在可能時間), 
+                エアライン参入数 = mean(エアライン参入社数)) %>% 
+  dplyr::select(空港i, 空港j, i, j, 所要時間, 費用, 
+                航空便数, 滞在可能時間, エアライン参入数) %>% 
+  dplyr::distinct()
+
+# Merge airline data into the whole airline dataframe
+dataframe.airline <- dataframe.airline %>% 
+  dplyr::left_join(airline, by = c("X47ゾーンi" = "i",
+                                   "X47ゾーンj" = "j")) %>% 
+  # Add Accessibility
+  dplyr::left_join(accessibility.airport, by = c("X207ゾーン名j" = "ゾーン")) %>% 
+  dplyr::left_join(accessibility.airport, by = c("X207ゾーン名i" = "ゾーン")) %>% 
+  dplyr::mutate(アクセシビリティ = アクセシビリティ.x + アクセシビリティ.y) %>% 
+  dplyr::select("X47ゾーンi", "X47ゾーンj", "i", "j", everything()) %>% 
+  # Add OD
+  dplyr::left_join(OD.207, by = c("X207ゾーンi", "X207ゾーンj")) %>% 
+  # Add Railway Dummy
+  dplyr::mutate(鉄道ダミー = 0) %>% 
+  # Select
+  dplyr::select("i", "j", "X207ゾーンi", "X207ゾーンj", "X47ゾーンi", "X47ゾーンj", 
+                "X207ゾーン名i", "X207ゾーン名j", "所要時間", "費用", "航空便数", 
+                "滞在可能時間", "アクセシビリティ", "鉄道ダミー", "エアライン参入数", 
+                "airline", "all2", "all") %>% 
+  dplyr::rename(x = airline, OD1 = all2, OD2 = all)
+
+# summary(dataframe.airline)
+
+
+## Railway Data
+dataframe.railway <- dataframe.railway %>% 
+  dplyr::left_join(railway, by = c("最寄りi" = "i", "最寄りj" = "j")) %>% 
+  dplyr::left_join(railwaycost, by = c("最寄りi" = "駅i", "最寄りj" = "駅j")) %>% 
+  dplyr::left_join(accessibility.station, by = c("X207ゾーン名j" = "ゾーン")) %>% 
+  dplyr::left_join(accessibility.station, by = c("X207ゾーン名i" = "ゾーン")) %>% 
+  dplyr::mutate(アクセシビリティ = アクセシビリティ.x + アクセシビリティ.y) %>% 
+  dplyr::left_join(OD.207, by = c("X207ゾーンi", "X207ゾーンj")) %>% 
+  # Add Railway Dummy and Other Airline-Related Variables
+  dplyr::mutate(鉄道ダミー = 1, 
+                航空便数 = 1, 
+                エアライン参入数 = 0) %>% 
+  # Select
+  dplyr::select("i.x", "j.x", "X207ゾーンi", "X207ゾーンj", "X47ゾーンi", "X47ゾーンj", 
+                "X207ゾーン名i", "X207ゾーン名j", "所要時間.1", "cost", "航空便数", 
+                "滞在可能時間.1", "アクセシビリティ", "鉄道ダミー", "エアライン参入数", 
+                "railway", "all2", "all", "distance") %>% 
+  dplyr::rename(i = i.x, j = j.x, 所要時間 = 所要時間.1, 費用 = cost, 
+                滞在可能時間 = 滞在可能時間.1, 
+                x = railway, OD1 = all2, OD2 = all,
+                路線距離 = distance) %>% 
+  # Transform Data Type
+  dplyr::mutate_at(vars(所要時間, 滞在可能時間, 費用),
+                   ~ as.numeric(.))
+
+# summary(dataframe.railway)
+```
+
+
+
+```{r IV}
+## Add airline data for IV estimation
+airline.as.IV <- airline.as.IV %>% 
+  dplyr::left_join(airport.number, by = c("空港i" = "空港")) %>% 
+  dplyr::left_join(airport.number, by = c("空港j" = "空港")) %>% 
+  tidyr::drop_na(c(No.x, No.y)) %>% 
+  dplyr::mutate_at(vars(人キロメートル, 座席キロメートル, 
+                        貨物, 超過手荷物, 郵便物, 旅客, 
+                        貨物.1, 超過手荷物.1, 郵便物.1, 
+                        計, 利用可能.トンキロメートル),
+                   ~ stringr::str_replace_all(., ",", "")) %>% 
+  dplyr::mutate_at(vars(人キロメートル, 座席キロメートル, 
+                        貨物, 超過手荷物, 郵便物, 旅客, 
+                        貨物.1, 超過手荷物.1, 郵便物.1, 
+                        計, 利用可能.トンキロメートル),
+                   ~ as.numeric(.)) %>% 
+  dplyr::mutate(一便あたり座席数 = 座席数 / 運航回数, 
+                一便あたり貨物 = 貨物 / 運航回数, 
+                一便あたり超過手荷物 = 超過手荷物 / 運航回数, 
+                路線距離 = 運航キロメートル / 運航回数) %>% 
+  dplyr::select("No.x", "No.y", "一便あたり座席数", 
+                "一便あたり貨物", "一便あたり超過手荷物", "路線距離") %>% 
+  dplyr::group_by(No.x, No.y) %>% 
+  dplyr::summarise_at(vars("一便あたり座席数", "一便あたり貨物", 
+                           "一便あたり超過手荷物", "路線距離"),
+                      ~ mean(.))
+
+## Merge
+## Add to Airline
+dataframe.airline <- dataframe.airline %>% 
+  dplyr::left_join(airline.as.IV, by = c("X47ゾーンi" = "No.x",
+                                         "X47ゾーンj" = "No.y")) %>% 
+  tidyr::replace_na(replace = list(一便あたり座席数 = 0, 
+                                   一便あたり貨物 = 0,
+                                   一便あたり超過手荷物 = 0,
+                                   路線距離 = 0))
+
+## Add to Railway
+dataframe.railway <- dataframe.railway %>% 
+  dplyr::mutate(一便あたり座席数 = 0, 
+                一便あたり貨物 = 0, 
+                一便あたり超過手荷物 = 0)
+
+## Combine Airline and Railway Data to Get Dataframe
+df <- dataframe.airline %>% 
+  dplyr::bind_rows(dataframe.railway) %>% 
+  dplyr::arrange(i, j) %>% 
+  # Compute share and outside share
+  dplyr::mutate(prob1 = x/OD1, prob2 = x/OD2) %>% 
+  dplyr::mutate(share1 = ifelse(prob1 == 0, 1e-3, ifelse(prob1 == 1, 1 - 1e-3, prob1)), 
+                share2 = ifelse(prob2 == 0, 1e-3, ifelse(prob2 == 1, 1 - 1e-3, prob2))) %>% 
+  dplyr::group_by(i, j) %>% 
+  dplyr::mutate(out.share2 = 1 - sum(share2)) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(y = log(share1) - log(1 - share1)) %>% 
+  # Drop NAs
+  tidyr::drop_na()
+```
+
+```{r demand estimation}
+## OLS
+logit_OLS <- lm(data = df, 
+                formula = y ~ 費用 + log(航空便数) + アクセシビリティ + 
+                  鉄道ダミー + 一便あたり座席数 + 一便あたり貨物 + 所要時間)
+
+## IV Estimation
+## IVs are 所要時間, エアライン参入数, 滞在可能時間
+IVreg <- AER::ivreg(data = df, 
+                    formula = y ~ 費用 + log(航空便数) + アクセシビリティ + 
+                      鉄道ダミー + 一便あたり座席数 + 一便あたり貨物 + 所要時間| 
+                      所要時間 + エアライン参入数 + 滞在可能時間 + 
+                      log(航空便数) + アクセシビリティ + 鉄道ダミー + 
+                      路線距離 + 一便あたり座席数 + 一便あたり貨物 + 
+                      一便あたり超過手荷物)
+
+## 2 Stage Least Square
+# 1st Stage
+TSLS1 <- lm(data = df, 
+            formula = 費用 ~ 所要時間 + エアライン参入数 + 滞在可能時間 + 
+              log(航空便数) + アクセシビリティ + 鉄道ダミー + 
+              路線距離 + 一便あたり座席数 + 一便あたり貨物 + 一便あたり超過手荷物)
+
+# Insert Fitted Values
+data.for.2SLS <- df
+data.for.2SLS$費用 <- TSLS1$fitted.values
+
+# 2nd Stage
+TSLS2 <- lm(data = data.for.2SLS, 
+            formula = y ~ 費用 + log(航空便数) + アクセシビリティ + 
+              鉄道ダミー + 一便あたり座席数 + 一便あたり貨物 + 所要時間)
+
+```
+
+
+```{r estimation results}
+## Estimation Results
+coef_logit <- c(logit_OLS$coefficients)
+coef_IV <- c(IVreg$coefficients)
+coef_2SLS <- c(TSLS2$coefficients)
+coef <- rbind(coef_logit, coef_IV, coef_2SLS)
+coef <- format(round(coef, 4), 3)
+coef <- t(coef)
+colnames(coef) <- c("OLS", "IV", "2SLS")
+
+print(coef)
+
+## Output
+
+## 日時を噛ませる
+# demand_estimation_filename <- paste("Figure_Table/Demand_Estimation/Demand_Estimation_Results.tex")
+# 
+# summary <- stargazer::stargazer(logit_OLS, TSLS2, 
+#                                 type = "latex", 
+#                                 out = demand_estimation_filename,
+#                                 title = "Estimation Results",
+#                                 style = "default",
+#                                 no.space = T, 
+#                                 omit.stat=c("f","ser"), 
+#                                 column.labels = c("OLS", "IV"))
+
+## Finally we get utility parameters
+# logitpar <- logit10$coefficients
+# IVpar <- IVreg$coefficients
+# IVpar2 <- IVreg2$coefficients
+```
+

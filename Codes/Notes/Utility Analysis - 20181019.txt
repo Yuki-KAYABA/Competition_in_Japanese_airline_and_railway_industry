@@ -1,0 +1,152 @@
+## Delete all
+rm(list = ls())
+
+## Library
+library(magrittr)
+library(tidyr)
+
+## Read data
+airline <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/airline.csv", header = T)
+ODforairline <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/ODforairline.csv", header = T)
+data <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/data.csv", header = T)
+station <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/station.csv", header = T)
+airport <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/airport.csv", header = T)
+combine <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/combine.csv", header = T)
+railway <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/railway.csv", header = T)
+railwaycost <- read.csv("C:/Users/kayab/yuki/‘åŠwu‹`/‘åŠw‰@ƒ[ƒ~/Data/railwaycost.csv", header = T)
+
+## Combine airports
+for(k in 1:2){
+  for(i in 1:174){
+    for(j in 1:8){
+      if(airline[i, k+1] == combine[j, 1]){
+        airline[i, k+3] <- combine[j, 3]
+      } else {
+        
+      }
+    }
+  }
+}
+
+## Combine ODs
+airline <- airline %>% 
+  dplyr::group_by(‹ó`i, ‹ó`j) %>% 
+  dplyr::mutate(i = min(i),
+                j = min(j),
+                freq = sum(q‹ó•Ö”),
+                cost = mean(”ï—p),
+                duration = mean(Š—vŽžŠÔ),
+                stay = mean(‘ØÝ‰Â”\ŽžŠÔ),
+                entry = mean(ƒGƒAƒ‰ƒCƒ“ŽQ“üŽÐ”)) %>% 
+  dplyr::summarise_each(dplyr::funs(mean), 
+                        vars = c('i', 'j', 'duration', 'cost', 'freq', 'stay', 'entry'))
+colnames(airline) <- c("‹ó`i", "‹ó`j", "i", "j", "duration", "cost", "freq", "stay", "entry")
+
+# Insert airline data into the whole one
+for(i in 1:nrow(data)){
+  for(j in 1:nrow(airline)){
+    if(data[i, 20]==0 && data[i, 6]==airline[j, 3] && data[i, 7]==airline[j, 4]){
+      data[i , c(15, 16, 17, 18, 21)] <- airline[j, c(5, 6, 7, 8, 9)]
+    } else {
+      
+    }
+  }
+}
+
+# Transform Š—vŽžŠÔ and ‘ØÝ‰Â”\ŽžŠÔ and cost into numeric
+railway$Š—vŽžŠÔ.1 <-as.numeric(as.character(railway$Š—vŽžŠÔ.1))
+railway$‘ØÝ‰Â”\ŽžŠÔ.1 <- as.numeric(as.character(railway$‘ØÝ‰Â”\ŽžŠÔ.1))
+railwaycost$cost <- as.numeric(as.character(railwaycost$cost))
+
+# Attach appropriate figures to each station 
+for(k in 1:2){
+  for(i in 1:nrow(railway)){
+    for(j in 1:nrow(station)){
+      if(railway[i, k + 2]==station[j, 2]){
+        railway[i, k + 23] <- station[j, 1]
+      } else {
+        
+      }
+    }
+  }
+}
+for(k in 1:2){
+  for(i in 1:nrow(railwaycost)){
+    for(j in 1:nrow(station)){
+      if(railwaycost[i, k + 2]==station[j, 2]){
+        railwaycost[i, k + 6] <- station[j, 1]
+      } else {
+        
+      }
+    }
+  }
+}
+
+## Substitute 0 into NAs so that the following code will run
+for(k in 1:2){
+  for(i in 1:nrow(railway)){
+    if(is.na(railway[i, k + 23])){
+      railway[i, k + 23] <- 0
+    } else {
+      
+    }
+  }
+}
+for(k in 1:2){
+  for(i in 1:nrow(railwaycost)){
+    if(is.na(railwaycost[i, k + 6])){
+      railwaycost[i, k + 6] <- 0
+    } else {
+      
+    }
+  }
+}
+
+## Insert railways duration, stay, and cost data  
+for(i in 1:nrow(data)){
+  for(j in 1:nrow(railway)){
+    if(data[i, 20]==1 && data[i, 4]==railway[j, 24] && data[i, 5]==railway[j, 25]){
+      data[i , c(15, 18)] <- railway[j, c(22, 23)]
+    } else {
+      
+    }
+  }
+}
+for(i in 1:nrow(data)){
+  for(j in 1:nrow(railwaycost)){
+    if(data[i, 20]==1 && data[i, 4]==railwaycost[j, 7] && data[i, 5]==railwaycost[j, 8]){
+      data[i , 16] <- railwaycost[j, 6]*2 # I have to revise this! I just get data only on æŽÔŒ”‰^’À
+    } else {
+      
+    }
+  }
+}
+
+## Insert 1s into q‹ó•Ö” if railway dummy is equal to 1, so that ln(q‹ó•Ö”) will be zero when the dummy is 1
+for(i in 1:nrow(data)){
+  if(data[i, 20]==1){
+    data[i, c(17, 21)] <- c(1, 0)
+  } else {
+    
+  }
+}
+
+## If succesful, data for utility analysis is called demand
+demand <- data
+
+## Estimate parameters of utility function
+demand$x_ij.k <-as.numeric(as.character(demand$x_ij.k))
+demand$ODij <- as.numeric(as.character(demand$ODij))
+
+demand <- demand %>% 
+  dplyr::mutate(prob = ifelse(x_ij.k/ODij == 0, 1e-3, ifelse(x_ij.k/ODij == 1, 1 - 1e-3, x_ij.k/ODij)))
+demand <- demand[ , c(22, 15, 16, 17 ,18, 19, 20)]
+demand <- demand %>% 
+  dplyr::mutate(y = log(prob) - log(1 - prob))
+logit <- lm(data = demand, formula = y ~ Š—vŽžŠÔ + ”ï—p + log(q‹ó•Ö”) + ‘ØÝ‰Â”\ŽžŠÔ + ƒAƒNƒZƒVƒrƒŠƒeƒB + “S“¹ƒ_ƒ~[)
+logit_summary <- stargazer::stargazer(logit, type = "html")
+
+## See if the logit estimation successfully worked
+logit2 <- glm(data = demand, formula = prob ~ Š—vŽžŠÔ + ”ï—p + log(q‹ó•Ö”) + ‘ØÝ‰Â”\ŽžŠÔ + ƒAƒNƒZƒVƒrƒŠƒeƒB + “S“¹ƒ_ƒ~[, 
+              family = binomial)
+logit2_summary <- stargazer::stargazer(logit2, type = "html")

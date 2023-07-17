@@ -1,0 +1,177 @@
+## Library
+library(magrittr)
+library(tidyr)
+
+## New data
+datalie2 <- read.csv("C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/datalie2.csv", header = T)
+
+## Attach new airlineNo
+airlineNo2 <- c(1, 2, 3, 4, 5)
+airlinenames2 <- c("JAL", "ANA", "SFJ", "SKY", "JAC")
+airlinecorrespondence2 <- data.frame(airlineNo = airlineNo2, airlinenames = airlinenames2)
+for(i in 1:nrow(datalie2)){
+  for(j in 1:nrow(airlinecorrespondence2)){
+    if(datalie2[i, 5] == airlinecorrespondence2[j, 2]){
+      datalie2[i, 24] <- airlinecorrespondence2[j, 1]
+    }
+  }
+}
+colnames(datalie2)[24] <- "airlineNo"
+# s[3]が所要時間、s[2]が費用←内生変数
+
+## Write functions
+## prob is a function which returns Pr
+prob <- function(a){
+  exputility <- rep(0, nrow(datalie2))
+  sumexputility <- rep(0, nrow(datalie2))
+  Frequency <- ifelse(Frequency == 0, 1e-4, Frequency)
+  for(k in 1:nrow(datalie2)){
+    exputility[k] <- (a*exp(utilitypar[1] + utilitypar[2]*datalie2$所要時間[k] + utilitypar[3]*Price[k]
+                            + utilitypar[4]*log(Frequency[k]) + utilitypar[5]*datalie2$滞在可能時間[k]
+                            + utilitypar[6]*datalie2$アクセシビリティ[k] + utilitypar[7]*datalie2$鉄道ダミー[k]
+                            + utilitypar[8]*datalie2$エアライン参入数[k]))
+  }
+  sumexputility <- data.frame(i = datalie2$i, j = datalie2$j, exputility = exputility)
+  sumexputility <- sumexputility %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sumexputility = sum(exputility)) %>% 
+    dplyr::ungroup()
+  sumexputility <- sumexputility$sumexputility
+  sumexputility <- as.numeric(sumexputility)
+  output <- exputility/sumexputility
+  return(output)
+}
+
+## Write a function which returns first order derivative
+partialderiv <- function(a){
+  exputility <- c(rep(0, nrow(datalie2)))
+  sumexputility <- c(rep(0, nrow(datalie2)))
+  Frequency <- ifelse(Frequency == 0, 1e-4, Frequency)
+  for(k in 1:nrow(datalie2)){
+    exputility[k] <- (a*exp(utilitypar[1] + utilitypar[2]*datalie2$所要時間[k] + utilitypar[3]*Price[k]
+                            + utilitypar[4]*log(Frequency[k]) + utilitypar[5]*datalie2$滞在可能時間[k]
+                            + utilitypar[6]*datalie2$アクセシビリティ[k] + utilitypar[7]*datalie2$鉄道ダミー[k]
+                            + utilitypar[8]*datalie2$エアライン参入数[k]))
+  }
+  sumexputility <- data.frame(i = datalie2$i, j = datalie2$j, exputility = exputility)
+  sumexputility <- sumexputility %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sumexputility = sum(exputility)) %>% 
+    dplyr::ungroup()
+  sumexputility <- sumexputility[ , 4]
+  exputility <- as.numeric(exputility)
+  sumexputility <- as.numeric(sumexputility$sumexputility)
+  output <- matrix(0, nrow = nrow(datalie2), ncol = nrow(datalie2))
+  for(i in 1:nrow(datalie2)){
+    for(j in 1:nrow(datalie2)){
+      if(datalie2[i, 1] == datalie2[j, 1] && datalie2[i, 2] == datalie2[j, 2] && datalie2[i, 5] == datalie2[j, 5]){
+        output[i + nrow(datalie2)*(j - 1)] <- (-1)*(utilitypar[3]*exputility[i]*exputility[j])/((sumexputility[i])^2)
+      } else {
+        
+      }
+    }
+  }
+  for(i in 1:nrow(datalie2)){
+    output[i + nrow(datalie2)*(i - 1)] <- (utilitypar[3]*exputility[i]*(sumexputility[i] - exputility[i]))/((sumexputility[i])^2)
+  }
+  return(output)
+}
+
+## Define vectors of endogenous variables called Price and Frequency
+Price <- as.numeric(datalie2$費用) # As a initial value we give real data
+Frequency <- as.numeric(datalie2$航空便数)
+Pricerenewal <- c(rep(0, nrow(datalie2)))
+Frequencyrenewal <- c(rep(0, nrow(datalie2)))
+Demand <- as.numeric(datalie2$旅客数/365) ## ここ書き換えた
+Profit <- c(rep(0), 5)
+Profitrenewal <- c(rep(0), 5)
+
+## ===================================================================
+## Stopping criteria
+distance3 <- 1000
+iter3 <- 1
+while(distance3 > 1e-4){
+  for(n in 1:5){
+    ## Drop airlines other than interested
+    Unit <- diag(nrow(datalie2)) ## This is necessary for removing airlines out of interest
+    for(i in 1:nrow(datalie2)){
+      if(datalie2[i, 24] != n){ #########################
+        Unit[i + nrow(datalie2)*(i - 1)] <-0
+      }
+    }
+    
+    ## Optimization
+    ## Stopping Criteria
+    distance2 <- 1000
+    iter2 <- 1
+    sign <- -5
+    ## First Order Condition
+    while((distance > 1e-4) | (sign < 0)){
+      ## First we calculate Freq
+      ## Stopping creiteria
+      distance <- 1000
+      iter <- 1
+      
+      while(iter < 3){
+        Pr <- prob(1) # "a" should be revised
+        for(i in 1:nrow(datalie2)){
+          if(datalie2[i, 24] == n){ ### "JAL" MUST be replaced with airlineNo!!
+            Demand[i] <- datalie2[i, 14]*Pr[i]/365                                            ### ここ書き換えた
+            Frequencyrenewal[i] <- (Demand[i]/(datalie2[i, 20]*datalie2[i, 23]/100))          ### ここ書き換えた
+          } else {
+            Frequencyrenewal[i] <- Frequency[i]
+          }
+        }
+        Frequency <- as.numeric(Frequency)
+        Frequencyrenewal <- as.numeric(Frequencyrenewal)
+        distance <- sqrt(sum(Frequency - Frequencyrenewal)^2)
+        Frequency <- Frequencyrenewal
+        iter <- iter +1
+      }
+      
+      ## Next we calculate Price
+      Derivmatrix <- partialderiv(1) ## I have to revise this later
+      Demand <- as.numeric(Demand)
+      MC <- as.matrix(datalie2$MC)
+      MC <- ifelse(is.na(MC), 0, MC)
+      Price <- as.matrix(Price)
+      FOC <- Unit %*% (Demand + Derivmatrix %*% (Price - MC))
+      airlinedummy <- rowSums(Unit)
+      colindex <- 0
+      for(i in 1:length(airlinedummy)){
+        if(airlinedummy[i] == 1){
+          colindex <- c(colindex, i)
+        } else {
+          
+        }
+      }
+      colindex <- colindex[c(-1)]
+      airlineDemand <- Demand[colindex]
+      airlineMC <- MC[colindex]
+      airlineDerivmatrix <- Derivmatrix[colindex, colindex]
+      airlinePrice <- airlineMC + (-1)*solve(airlineDerivmatrix) %*% airlineDemand
+      airlinePrice <- airlinePrice[ , 1]
+      Pricerenewal <- Price
+      for(i in 1:length(colindex)){
+        Pricerenewal[colindex[i]] <- airlinePrice[i]
+      }
+      Price <- Pricerenewal
+      distance2 <- sqrt(sum(FOC)^2)
+      sign <- sum(sign(Price)) - as.numeric(length(Price))
+      iter2 <- iter2 + 1 
+      Profitrenewal[n] <- (airlinePrice - airlineMC)*airlineDemand
+    }
+    
+  }
+  
+  distance3 <- sqrt(sum((Profitrenewal - Profit)^2))
+  Profit <- Profitrenewal
+}
+
+
+
+
+resultbd <- data.frame(simulatedPrice = Pricerenewal[, 1], observedPrice = datalie2$費用, 
+                       Frequency = Frequency, Pr = Pr, ObservedFreq = datalie2$航空便数, 
+                       ObservedPr = datalie2$observedprob)
+write.csv(resultbd, "C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/resultbd.csv")

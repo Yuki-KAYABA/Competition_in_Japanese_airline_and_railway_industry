@@ -1,0 +1,392 @@
+---
+title: "Master_Thesis_Simulation"
+author: "Yuki KAYABA"
+date: '2023-06-26'
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
+#output_dir: docs
+#bookdown::gitbook: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, cache = TRUE, 
+                      root.dir = rprojroot::find_rstudio_root_file())
+## Library
+library(magrittr)
+library(tidyr)
+
+```
+
+
+```{r preparation}
+
+## Demand Parameters
+parameter <- IVreg$coefficients
+
+## New data
+df_sim <- read.csv("Data/Main/data_updated.csv", 
+                   header = T, fileEncoding = "shift-JIS")
+
+## Attach new airlineNo
+N_airline <- 10
+airlineNo <- seq(1:N_airline)
+airlinenames <- c("JAL", "ANA", "SFJ", "SKY", "JAC", "ADO", "IBX", "JTA", "HAC", "JEX")
+
+airline_correspondence <- cbind(airlineNo, airlinenames) %>% 
+  as_tibble() %>% 
+  dplyr::mutate(airlineNo = as.numeric(airlineNo))
+
+df_sim <- df_sim %>% 
+  dplyr::left_join(airline_correspondence, 
+                   by = c("航空会社" = "airlinenames")) %>% 
+  tidyr::replace_na(replace = list(airlineNo = 0))
+
+## Prepare adjustment parameter alpha
+### Revise Later
+calculate.alpha <- function(x, y){
+  X <<- x %*% t(y) - diag(y)
+  L <<- X
+  L[upper.tri(L)] <<- 0
+  U <<- X
+  U[lower.tri(U, diag = T)] <<- 0
+  iteration <- 1000
+  xx <<- matrix(rep(1, length(x)), nrow = length(x), ncol = 1) ## Initial value
+  for(k in 1:iteration){
+    xx <<- (-1)*solve(L) %*% U %*% xx
+  }
+  output <<- xx[, 1]/xx[1,1]
+  return(output)
+}
+
+## Add alpha
+df_sim <- df_sim %>% 
+  # Replace NAs in Freq with 1
+  tidyr::replace_na(replace = list(Freq = 1)) %>% 
+  # Calculate Mean Utility
+  dplyr::mutate(utility = 
+                  parameter[1]
+                + parameter[2] * 費用 
+                + parameter[3] * log(Freq)
+                + parameter[4] * アクセシビリティ
+                + parameter[5] * 鉄道ダミー
+                + parameter[6] * 一便あたり座席数
+                + parameter[7] * 一便あたり貨物
+                + parameter[8] * 所要時間,
+                exputility = exp(utility)) %>% 
+  ## Add alpha
+  dplyr::group_by(i, j) %>% 
+  dplyr::mutate(alpha = calculate.alpha(observedprob, exputility)) %>% 
+  dplyr::ungroup()
+
+```
+
+## Functions
+
+We write some functions to simulate optimal prices set by each airline.
+
+- `adjusted_choice_probability` calculates logit choice probability which allows adjustments so that initial choice probability can be the same as actual choice probability.
+- `calculate_frequency` returns flight frequency that matches calculated demand. This function calculates $Freq_{k} = \frac{d_{k}}{LF_{k}Seat_{k}}$.
+- `objective` calculates the profit of an airline under certain levels of prices of each route. This function is used as the objective function of each airline's profit maximization.
+
+```{r functions}
+## Calculate Adjusted Choice Probability
+adjusted_choice_probability <- function(df, parameter, alpha_flg){
+  output <- df %>% 
+    dplyr::mutate(exp_utility = 
+                    ifelse(alpha_flg == 1, alpha, 1) *
+                    exp(parameter[1]
+                        + parameter[2] * p
+                        + parameter[3] * log(f)
+                        + parameter[4] * アクセシビリティ
+                        + parameter[5] * 鉄道ダミー
+                        + parameter[6] * 一便あたり座席数
+                        + parameter[7] * 一便あたり貨物
+                        + parameter[8] * 所要時間)) %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sum_exp_utility = sum(exp_utility)) %>% 
+    ungroup() %>% 
+    dplyr::mutate(adjusted_choice_probability =
+                    exp_utility / sum_exp_utility)
+  
+  return(output)
+}
+
+## Calculate Frequency
+calculate_frequency <- function(df, parameter, alpha_flg, n){
+  output <- df %>% 
+    adjusted_choice_probability(parameter, alpha_flg) %>% 
+    dplyr::mutate(f_renewal = 
+                    ifelse(airlineNo == n,
+                           OD * adjusted_choice_probability / (Seat * LF / 100),
+                           f),
+                  f_renewal = 
+                    ifelse(f_renewal < 1, 1, f_renewal))
+  
+  return(output)
+}
+
+
+## Objective Function for Profit Maximization
+objective <- function(objective_price, df, parameter, alpha_flg, n){
+  df <- df %>% 
+    dplyr::mutate(p = ifelse(airlineNo == n,
+                             objective_price, 
+                             p)) %>% 
+    adjusted_choice_probability(parameter, alpha_flg) %>% 
+    dplyr::filter(airlineNo == n) %>% 
+    dplyr::mutate(profit = (p - MC) * OD * adjusted_choice_probability)
+    
+  output <- sum(df$profit)
+
+  return(output)
+}
+
+```
+
+
+
+```{r simulation}
+## Define vectors of endogenous variables called Price and Frequency
+# Price <- as.numeric(df_sim$費用/2) # ここ要検討。JRまで2で割ってよいのか
+
+price <- as.numeric(df_sim$費用)# ここ要検討。JRまで2で割ってよいのか
+f <- as.numeric(df_sim$Freq)
+alpha_flg <- 0 # 1 if adjustment and 0 if w/o adjustment
+
+count <- 1
+count.price <- 1
+count.profit <- 1
+
+df_sim <- df_sim %>% 
+  dplyr::mutate(p = ifelse(airlineNo == 0, 費用, 費用/2), 
+                f = Freq)
+
+objective_price <- df_sim$p
+
+Frequency <- as.numeric(df_sim$Freq) # ここ書き換えた
+Frequency <- ifelse(is.na(Frequency), 1, Frequency)
+Pricerenewal <- c(rep(0, nrow(df_sim)))
+Frequencyrenewal <- c(rep(0, nrow(df_sim)))
+Demand <- as.numeric(df_sim$旅客数) ## ここ書き換えた（また書き換えた）
+Profit <- c(rep(0, N_airline))
+Profitrenewal <- c(rep(0, N_airline))
+
+## Matrics
+Frequency.matrix <- matrix(0, nrow = 10^5, ncol = nrow(df_sim)) 
+Frequency.matrix[1, ] <- Frequency
+Price.matrix <- matrix(0, nrow = 10^5, ncol = nrow(df_sim))
+Price.matrix[1, ] <- df_sim$p
+Profit.matrix <- matrix(0, nrow = 10^5, ncol = N_airline) ## 参入数
+
+## Set the numbers of iteration
+it <- 10^4
+it2 <- 10^4
+it3 <- 10^4
+
+## Stopping criteria
+distance3 <- 1000
+iter3 <- 1
+
+system.time(
+  while(distance3 > 1e-4 & iter3 < it3){
+    for(n in 1:N_airline){
+
+      ## Optimization
+      ## Stopping criteria for calculating frequency
+      distance2 <- 10^3
+      iter2 <- 1
+      
+      while(((distance2 > 1e-4) & (iter2 < it2)) | (iter2 < 3)){
+        ## Stopping criteria for calculating frequency
+        distance <- 10^3
+        iter <- 1
+        
+        # Calculate Frequency
+        while((distance > 1e-4 & iter < it)){
+  
+          df_sim <- calculate_frequency(df_sim, parameter, alpha_flg, n)
+          distance <- sqrt(sum(df_sim$f - df_sim$f_renewal)^2)
+          
+          ## Update Frequency
+          df_sim <- df_sim %>% 
+            dplyr::mutate(f = f_renewal)
+          
+          ## Count
+          Frequency.matrix[count + 1, ] <- Frequencyrenewal
+          
+          # print(paste("iter:", iter))
+          # print(paste("distance", distance))
+          # print(paste("count", count))
+          
+          iter <- iter + 1
+          count <- count + 1
+        }
+      
+      ## Calculate Price
+      profit.maximization <- optim(par = objective_price, 
+                                   fn = objective, 
+                                   control = list(fnscale = -1),
+                                   df = df_sim, 
+                                   parameter = parameter,
+                                   alpha_flg = alpha_flg, 
+                                   n = n)
+      
+      ## Renewal Price
+      df_sim <- df_sim %>% 
+        dplyr::mutate(p = ifelse(airlineNo == n,
+                                 profit.maximization$par,
+                                 p)) %>% 
+        adjusted_choice_probability(parameter, alpha_flg)
+        
+      price_renewal <- df_sim$p
+      distance2 <- sqrt(sum(price_renewal - price)^2)
+
+      price <- price_renewal
+      objective_price <- price_renewal      
+
+      Profitrenewal <- profit.maximization$value
+      
+      # print(price_renewal)
+      # print(price)
+      # print(price_renewal - price)
+      # print(paste("profit:", Profitrenewal))
+      # print(paste("price:", price_renewal[1:10]))
+      
+      print(paste("iter2:", iter2))
+      print(paste("distance2:", distance2))
+      
+      iter2 <- iter2 + 1
+      count.price <- count.price + 1    
+      }
+    
+    print(paste("n:", n))
+    
+    }
+    
+    Profit.matrix[count.profit, ] <- Profitrenewal
+    distance3 <- sqrt(sum((Profitrenewal - Profit)^2))
+    
+    print(paste("iter3:", iter3))
+    print(paste("distance3", distance3))
+    print(paste("count.profit", count.profit))
+
+    Profit <- Profitrenewal
+    iter3 <- iter3 + 1
+    count.profit <- count.profit + 1
+  }
+)
+
+Frequency.matrix <- Frequency.matrix[c(seq(1:(count))), ]
+Price.matrix <- Price.matrix[c(seq(1:(count.price))), ]
+Profit.matrix <- Profit.matrix[c(seq(1:(count.profit - 1))), ]
+Demand <- unlist(Demand)
+simulation.results <- data.frame(Price_simulation = Price, Price_observed = df_sim$費用, 
+                                 Frequency_simulation = Frequency, Frequency_observed = df_sim$Freq, 
+                                 Probability_simulation = Pr, Probability_observed = df_sim$observedprob, 
+                                 Demand_simulation = Demand, Demand_observed = df_sim$旅客数)
+simulation.results <- cbind(df_sim[ , c(2, 3, 4, 5, 6)], simulation.results)
+simulation.results$Price_observed <- simulation.results$Price_observed/2
+simulation.results$Demand_simulation[c(which(simulation.results$航空会社 == "JR"))] <- simulation.results$Demand_observed[c(which(simulation.results$航空会社 == "JR"))]*simulation.results$Probability_simulation[c(which(simulation.results$航空会社 == "JR"))]/simulation.results$Probability_observed[c(which(simulation.results$航空会社 == "JR"))] 
+
+write.csv(simulation.results, "C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/simulation_results.csv")
+```
+
+
+
+```{r plot results}
+## Write some functions
+## Plot Frequency
+Frequency.series <- function(xi, xj){ ## nがエアラインNo, (i, j)が地域, 0で指定なし
+  x <- Frequency.matrix
+  x <-  x[, c(which(df_sim$i == xi & df_sim$j == xj))] # 直す
+  rownames(x) <- 1:nrow(x)
+  colnames(x) <- 1:ncol(x)
+  y <- reshape2::melt(x)
+  colnames(y) <- c("count", "route", "frequency")
+  
+  graph <- ggplot2::ggplot(y, ggplot2::aes(x = count, y = frequency, color = as.factor(route)))
+  graph <- graph + ggplot2::geom_line()
+  graph <- graph + ggsci::scale_color_nejm()
+  output <- ggplot2::ggsave(file = paste("航空便数 ", xi, "-", xj, ".png", sep = ""), plot(graph))
+  return(output)
+}
+## paste(i, j, sep = "-")
+## Plot Price
+Price.series <- function(xi, xj){ ## nがエアラインNo, (i, j)が地域, 0で指定なし
+  x <- Price.matrix
+  x <-  x[, c(which(df_sim$i == xi & df_sim$j == xj))] # 直す
+  rownames(x) <- 1:nrow(x)
+  colnames(x) <- 1:ncol(x)
+  y <- reshape2::melt(x)
+  colnames(y) <- c("count", "route", "price")
+  
+  graph <- ggplot2::ggplot(y, ggplot2::aes(x = count, y = price, color = as.factor(route)))
+  graph <- graph + ggplot2::geom_line()
+  graph <- graph + ggsci::scale_color_nejm()
+  output <- ggplot2::ggsave(file = paste("運賃 ", xi, "-", xj, ".png", sep = ""), plot(graph))
+  return(output)
+}
+## Profit
+Profit.series <- function(n){ ## nに何入れようが関係ない
+  x <- Profit.matrix
+  rownames(x) <- 1:nrow(x)
+  colnames(x) <- 1:ncol(x)
+  y <- reshape2::melt(x)
+  colnames(y) <- c("count", "airline", "profit")
+  
+  graph <- ggplot2::ggplot(y, ggplot2::aes(x = count, y = profit, color = as.factor(airline)))
+  graph <- graph + ggplot2::geom_line()
+  graph <- graph + ggsci::scale_color_nejm()
+  output <- ggplot2::ggsave(file = "利潤.png", plot(graph))
+  return(output)
+}
+
+
+## Substitution matrix
+Price.Substitution.Matrix <- function(xi, xj){
+  library(magrittr)
+  x <- df_sim %>% 
+    dplyr::filter(i == xi, j == xj) %>% 
+    dplyr::mutate(prob2 = 1 - observedprob)
+  xx <- -par[2]*t(x$費用*x$observedprob)
+  mat <- matrix(0, nrow = ncol(xx), ncol = ncol(xx))
+  for(i in 1:nrow(x)){
+    mat[i, ] <- xx
+  }
+  diag(mat) <- par[2]*(x$費用*x$prob2)
+  output <- mat
+  return(output)
+}
+Price.Substitution.Matrix(25, 37)
+
+Frequency.Substitution.Matrix <- function(xi, xj){
+  library(magrittr)
+  x <- df_sim %>% 
+    dplyr::filter(i == xi, j == xj) %>% 
+    dplyr::mutate(prob2 = 1 - observedprob)
+  xx <- -par[3]*as.matrix(x$observedprob)
+  xx <- t(xx)
+  mat <- matrix(0, nrow = ncol(xx), ncol = ncol(xx))
+  for(i in 1:nrow(x)){
+    mat[i, ] <- xx
+  }
+  diag(mat) <- par[3]*x$prob2
+  output <- mat
+  return(output)
+}
+Frequency.Substitution.Matrix(18, 37)
+
+## index
+index <- subset(df_sim, , c(i, j)) %>% unique() %>% as.matrix() 
+## save graph
+for(k in 1:nrow(index)){
+  Frequency.series(as.numeric(index[k, 1]), as.numeric(index[k, 2]))
+  Price.series(as.numeric(index[k, 1]), as.numeric(index[k, 2]))
+}
+Profit.series(0)
+
+#profit.counterfactual <- data.frame(Airline = airlinenames2, Profit = Profit)
+#write.csv(profit.counterfactual, "C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/profit_counterfactual.csv")
+```
+

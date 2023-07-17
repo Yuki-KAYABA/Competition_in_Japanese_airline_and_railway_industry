@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Master_Thesis_Utility_Analysis</title>
+  <meta name="description" content="Master_Thesis_Utility_Analysis" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Master_Thesis_Utility_Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Master_Thesis_Utility_Analysis" />
+  
+  
+  
+
+<meta name="author" content="Yuki KAYABA" />
+
+
+<meta name="date" content="2023-06-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="0.1" data-path=""><a href="#read-data"><i class="fa fa-check"></i><b>0.1</b> Read Data</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Master_Thesis_Utility_Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Master_Thesis_Utility_Analysis</h1>
+<p class="author"><em>Yuki KAYABA</em></p>
+<p class="date"><em>2023-06-21</em></p>
+</div>
+<div id="read-data" class="section level2 hasAnchor" number="0.1">
+<h2><span class="header-section-number">0.1</span> Read Data<a href="#read-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Read data. Note that we use data gathered and cleaned at the time when I completed my master thesis.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Read data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>airline <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/airline.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ODforairline <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/ODforairline.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/data.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>station <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/station.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>airport <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/airport.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>combine <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/combine.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>railway <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/railway.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>railwaycost <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/railwaycost.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>OD <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/OD.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>accessibility.station <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/accessibility_station.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>accessibility.airport <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/accessibility_airport.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>OD<span class="fl">.207</span> <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/207OD.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>dataframe.airline <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/dataframe_airline.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>dataframe.railway <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/dataframe_railway.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Data for IV</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>airline.as.IV <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/airline_updated.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>airport.number <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/airportNo47.csv&quot;</span>, <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine airports</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>airline <span class="ot">&lt;-</span> airline <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Merge fringe airports into major ones</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(空港<span class="at">i =</span> <span class="fu">case_when</span>(空港i <span class="sc">==</span> <span class="st">&quot;成田&quot;</span> <span class="sc">~</span> <span class="st">&quot;羽田&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;伊丹&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;南紀白浜&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;神戸&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;北九州&quot;</span> <span class="sc">~</span> <span class="st">&quot;福岡&quot;</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;佐賀&quot;</span> <span class="sc">~</span> <span class="st">&quot;福岡&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;中部&quot;</span> <span class="sc">~</span> <span class="st">&quot;名古屋&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                空港i <span class="sc">==</span> <span class="st">&quot;小牧&quot;</span> <span class="sc">~</span> <span class="st">&quot;名古屋&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> 空港i),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                空港<span class="at">j =</span> <span class="fu">case_when</span>(空港j <span class="sc">==</span> <span class="st">&quot;成田&quot;</span> <span class="sc">~</span> <span class="st">&quot;羽田&quot;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;伊丹&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>, </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;南紀白浜&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;神戸&quot;</span> <span class="sc">~</span> <span class="st">&quot;関西国際&quot;</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;北九州&quot;</span> <span class="sc">~</span> <span class="st">&quot;福岡&quot;</span>, </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;佐賀&quot;</span> <span class="sc">~</span> <span class="st">&quot;福岡&quot;</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;中部&quot;</span> <span class="sc">~</span> <span class="st">&quot;名古屋&quot;</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                                空港j <span class="sc">==</span> <span class="st">&quot;小牧&quot;</span> <span class="sc">~</span> <span class="st">&quot;名古屋&quot;</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> 空港j)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fares are translated to one-way</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(費用 <span class="ot">=</span> 費用 <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine ODs</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(空港i, 空港j) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">min</span>(i),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">j =</span> <span class="fu">min</span>(j),</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                費用 <span class="ot">=</span> <span class="fu">sum</span>(航空便数 <span class="sc">*</span> 費用) <span class="sc">/</span> <span class="fu">sum</span>(航空便数), <span class="do">## Weighted Mean</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                所要時間 <span class="ot">=</span> <span class="fu">sum</span>(航空便数 <span class="sc">*</span> 所要時間) <span class="sc">/</span> <span class="fu">sum</span>(航空便数), <span class="do">## Weighted Mean</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                航空便数 <span class="ot">=</span> <span class="dv">365</span> <span class="sc">*</span> <span class="fu">sum</span>(航空便数), </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                滞在可能時間 <span class="ot">=</span> <span class="fu">max</span>(滞在可能時間), </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                エアライン参入数 <span class="ot">=</span> <span class="fu">mean</span>(エアライン参入社数)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(空港i, 空港j, i, j, 所要時間, 費用, </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                航空便数, 滞在可能時間, エアライン参入数) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>()</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge airline data into the whole airline dataframe</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>dataframe.airline <span class="ot">&lt;-</span> dataframe.airline <span class="sc">%&gt;%</span> </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(airline, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X47ゾーンi&quot;</span> <span class="ot">=</span> <span class="st">&quot;i&quot;</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&quot;X47ゾーンj&quot;</span> <span class="ot">=</span> <span class="st">&quot;j&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add Accessibility</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(accessibility.airport, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーン名j&quot;</span> <span class="ot">=</span> <span class="st">&quot;ゾーン&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(accessibility.airport, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーン名i&quot;</span> <span class="ot">=</span> <span class="st">&quot;ゾーン&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(アクセシビリティ <span class="ot">=</span> アクセシビリティ.x <span class="sc">+</span> アクセシビリティ.y) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;X47ゾーンi&quot;</span>, <span class="st">&quot;X47ゾーンj&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;j&quot;</span>, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add OD</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(OD<span class="fl">.207</span>, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーンi&quot;</span>, <span class="st">&quot;X207ゾーンj&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add Railway Dummy</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(鉄道ダミー <span class="ot">=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;i&quot;</span>, <span class="st">&quot;j&quot;</span>, <span class="st">&quot;X207ゾーンi&quot;</span>, <span class="st">&quot;X207ゾーンj&quot;</span>, <span class="st">&quot;X47ゾーンi&quot;</span>, <span class="st">&quot;X47ゾーンj&quot;</span>, </span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;X207ゾーン名i&quot;</span>, <span class="st">&quot;X207ゾーン名j&quot;</span>, <span class="st">&quot;所要時間&quot;</span>, <span class="st">&quot;費用&quot;</span>, <span class="st">&quot;航空便数&quot;</span>, </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;滞在可能時間&quot;</span>, <span class="st">&quot;アクセシビリティ&quot;</span>, <span class="st">&quot;鉄道ダミー&quot;</span>, <span class="st">&quot;エアライン参入数&quot;</span>, </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;airline&quot;</span>, <span class="st">&quot;all2&quot;</span>, <span class="st">&quot;all&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">x =</span> airline, <span class="at">OD1 =</span> all2, <span class="at">OD2 =</span> all)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(dataframe.airline)</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Railway Data</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>dataframe.railway <span class="ot">&lt;-</span> dataframe.railway <span class="sc">%&gt;%</span> </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(railway, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;最寄りi&quot;</span> <span class="ot">=</span> <span class="st">&quot;i&quot;</span>, <span class="st">&quot;最寄りj&quot;</span> <span class="ot">=</span> <span class="st">&quot;j&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(railwaycost, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;最寄りi&quot;</span> <span class="ot">=</span> <span class="st">&quot;駅i&quot;</span>, <span class="st">&quot;最寄りj&quot;</span> <span class="ot">=</span> <span class="st">&quot;駅j&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(accessibility.station, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーン名j&quot;</span> <span class="ot">=</span> <span class="st">&quot;ゾーン&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(accessibility.station, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーン名i&quot;</span> <span class="ot">=</span> <span class="st">&quot;ゾーン&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(アクセシビリティ <span class="ot">=</span> アクセシビリティ.x <span class="sc">+</span> アクセシビリティ.y) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(OD<span class="fl">.207</span>, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X207ゾーンi&quot;</span>, <span class="st">&quot;X207ゾーンj&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add Railway Dummy and Other Airline-Related Variables</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(鉄道ダミー <span class="ot">=</span> <span class="dv">1</span>, </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>                航空便数 <span class="ot">=</span> <span class="dv">1</span>, </span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                エアライン参入数 <span class="ot">=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;i.x&quot;</span>, <span class="st">&quot;j.x&quot;</span>, <span class="st">&quot;X207ゾーンi&quot;</span>, <span class="st">&quot;X207ゾーンj&quot;</span>, <span class="st">&quot;X47ゾーンi&quot;</span>, <span class="st">&quot;X47ゾーンj&quot;</span>, </span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;X207ゾーン名i&quot;</span>, <span class="st">&quot;X207ゾーン名j&quot;</span>, <span class="st">&quot;所要時間.1&quot;</span>, <span class="st">&quot;cost&quot;</span>, <span class="st">&quot;航空便数&quot;</span>, </span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;滞在可能時間.1&quot;</span>, <span class="st">&quot;アクセシビリティ&quot;</span>, <span class="st">&quot;鉄道ダミー&quot;</span>, <span class="st">&quot;エアライン参入数&quot;</span>, </span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;railway&quot;</span>, <span class="st">&quot;all2&quot;</span>, <span class="st">&quot;all&quot;</span>, <span class="st">&quot;distance&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">i =</span> i.x, <span class="at">j =</span> j.x, 所要時間 <span class="ot">=</span> 所要時間<span class="fl">.1</span>, 費用 <span class="ot">=</span> cost, </span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                滞在可能時間 <span class="ot">=</span> 滞在可能時間<span class="fl">.1</span>, </span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> railway, <span class="at">OD1 =</span> all2, <span class="at">OD2 =</span> all,</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>                路線距離 <span class="ot">=</span> distance) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Transform Data Type</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">vars</span>(所要時間, 滞在可能時間, 費用),</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>                   <span class="sc">~</span> <span class="fu">as.numeric</span>(.))</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(dataframe.railway)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Add airline data for IV estimation</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>airline.as.IV <span class="ot">&lt;-</span> airline.as.IV <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(airport.number, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;空港i&quot;</span> <span class="ot">=</span> <span class="st">&quot;空港&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(airport.number, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;空港j&quot;</span> <span class="ot">=</span> <span class="st">&quot;空港&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(<span class="fu">c</span>(No.x, No.y)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">vars</span>(人キロメートル, 座席キロメートル, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                        貨物, 超過手荷物, 郵便物, 旅客, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                        貨物<span class="fl">.1</span>, 超過手荷物<span class="fl">.1</span>, 郵便物<span class="fl">.1</span>, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                        計, 利用可能.トンキロメートル),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                   <span class="sc">~</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(., <span class="st">&quot;,&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">vars</span>(人キロメートル, 座席キロメートル, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                        貨物, 超過手荷物, 郵便物, 旅客, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                        貨物<span class="fl">.1</span>, 超過手荷物<span class="fl">.1</span>, 郵便物<span class="fl">.1</span>, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                        計, 利用可能.トンキロメートル),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                   <span class="sc">~</span> <span class="fu">as.numeric</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(一便あたり座席数 <span class="ot">=</span> 座席数 <span class="sc">/</span> 運航回数, </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                一便あたり貨物 <span class="ot">=</span> 貨物 <span class="sc">/</span> 運航回数, </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                一便あたり超過手荷物 <span class="ot">=</span> 超過手荷物 <span class="sc">/</span> 運航回数, </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                路線距離 <span class="ot">=</span> 運航キロメートル <span class="sc">/</span> 運航回数) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;No.x&quot;</span>, <span class="st">&quot;No.y&quot;</span>, <span class="st">&quot;一便あたり座席数&quot;</span>, </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;一便あたり貨物&quot;</span>, <span class="st">&quot;一便あたり超過手荷物&quot;</span>, <span class="st">&quot;路線距離&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(No.x, No.y) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise_at</span>(<span class="fu">vars</span>(<span class="st">&quot;一便あたり座席数&quot;</span>, <span class="st">&quot;一便あたり貨物&quot;</span>, </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;一便あたり超過手荷物&quot;</span>, <span class="st">&quot;路線距離&quot;</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">~</span> <span class="fu">mean</span>(.))</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Merge</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Add to Airline</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>dataframe.airline <span class="ot">&lt;-</span> dataframe.airline <span class="sc">%&gt;%</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(airline.as.IV, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;X47ゾーンi&quot;</span> <span class="ot">=</span> <span class="st">&quot;No.x&quot;</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;X47ゾーンj&quot;</span> <span class="ot">=</span> <span class="st">&quot;No.y&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(一便あたり座席数 <span class="ot">=</span> <span class="dv">0</span>, </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>                                   一便あたり貨物 <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                                   一便あたり超過手荷物 <span class="ot">=</span> <span class="dv">0</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>                                   路線距離 <span class="ot">=</span> <span class="dv">0</span>))</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Add to Railway</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>dataframe.railway <span class="ot">&lt;-</span> dataframe.railway <span class="sc">%&gt;%</span> </span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(一便あたり座席数 <span class="ot">=</span> <span class="dv">0</span>, </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                一便あたり貨物 <span class="ot">=</span> <span class="dv">0</span>, </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                一便あたり超過手荷物 <span class="ot">=</span> <span class="dv">0</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine Airline and Railway Data to Get Dataframe</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> dataframe.airline <span class="sc">%&gt;%</span> </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(dataframe.railway) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(i, j) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Compute share and outside share</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">prob1 =</span> x<span class="sc">/</span>OD1, <span class="at">prob2 =</span> x<span class="sc">/</span>OD2) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">share1 =</span> <span class="fu">ifelse</span>(prob1 <span class="sc">==</span> <span class="dv">0</span>, <span class="fl">1e-3</span>, <span class="fu">ifelse</span>(prob1 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">1e-3</span>, prob1)), </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>                <span class="at">share2 =</span> <span class="fu">ifelse</span>(prob2 <span class="sc">==</span> <span class="dv">0</span>, <span class="fl">1e-3</span>, <span class="fu">ifelse</span>(prob2 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span> <span class="sc">-</span> <span class="fl">1e-3</span>, prob2))) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(i, j) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">out.share2 =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>(share2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">y =</span> <span class="fu">log</span>(share1) <span class="sc">-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> share1)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop NAs</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## OLS</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>logit_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> df, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">formula =</span> y <span class="sc">~</span> 費用 <span class="sc">+</span> <span class="fu">log</span>(航空便数) <span class="sc">+</span> アクセシビリティ <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  鉄道ダミー <span class="sc">+</span> 一便あたり座席数 <span class="sc">+</span> 一便あたり貨物 <span class="sc">+</span> 所要時間)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## IV Estimation</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## IVs are 所要時間, エアライン参入数, 滞在可能時間</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>IVreg <span class="ot">&lt;-</span> AER<span class="sc">::</span><span class="fu">ivreg</span>(<span class="at">data =</span> df, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">formula =</span> y <span class="sc">~</span> 費用 <span class="sc">+</span> <span class="fu">log</span>(航空便数) <span class="sc">+</span> アクセシビリティ <span class="sc">+</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                      鉄道ダミー <span class="sc">+</span> 一便あたり座席数 <span class="sc">+</span> 一便あたり貨物 <span class="sc">+</span> 所要時間<span class="sc">|</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                      所要時間 <span class="sc">+</span> エアライン参入数 <span class="sc">+</span> 滞在可能時間 <span class="sc">+</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">log</span>(航空便数) <span class="sc">+</span> アクセシビリティ <span class="sc">+</span> 鉄道ダミー <span class="sc">+</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                      路線距離 <span class="sc">+</span> 一便あたり座席数 <span class="sc">+</span> 一便あたり貨物 <span class="sc">+</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                      一便あたり超過手荷物)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Stage Least Square</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1st Stage</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>TSLS1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> df, </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">formula =</span> 費用 <span class="sc">~</span> 所要時間 <span class="sc">+</span> エアライン参入数 <span class="sc">+</span> 滞在可能時間 <span class="sc">+</span> </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>              <span class="fu">log</span>(航空便数) <span class="sc">+</span> アクセシビリティ <span class="sc">+</span> 鉄道ダミー <span class="sc">+</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>              路線距離 <span class="sc">+</span> 一便あたり座席数 <span class="sc">+</span> 一便あたり貨物 <span class="sc">+</span> 一便あたり超過手荷物)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert Fitted Values</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>data.for<span class="fl">.2</span>SLS <span class="ot">&lt;-</span> df</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>data.for<span class="fl">.2</span>SLS<span class="sc">$</span>費用 <span class="ot">&lt;-</span> TSLS1<span class="sc">$</span>fitted.values</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd Stage</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>TSLS2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data.for<span class="fl">.2</span>SLS, </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">formula =</span> y <span class="sc">~</span> 費用 <span class="sc">+</span> <span class="fu">log</span>(航空便数) <span class="sc">+</span> アクセシビリティ <span class="sc">+</span> </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>              鉄道ダミー <span class="sc">+</span> 一便あたり座席数 <span class="sc">+</span> 一便あたり貨物 <span class="sc">+</span> 所要時間)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Estimation Results</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>coef_logit <span class="ot">&lt;-</span> <span class="fu">c</span>(logit_OLS<span class="sc">$</span>coefficients)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>coef_IV <span class="ot">&lt;-</span> <span class="fu">c</span>(IVreg<span class="sc">$</span>coefficients)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>coef_2SLS <span class="ot">&lt;-</span> <span class="fu">c</span>(TSLS2<span class="sc">$</span>coefficients)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">rbind</span>(coef_logit, coef_IV, coef_IV2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(coef, <span class="dv">4</span>), <span class="dv">3</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">t</span>(coef)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(coef) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;OLS&quot;</span>, <span class="st">&quot;IV&quot;</span>, <span class="st">&quot;2SLS&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coef)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Output</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 日時を噛ませる</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># demand_estimation_filename &lt;- paste(&quot;Figure_Table/Demand_Estimation/Demand_Estimation_Results.tex&quot;)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># summary &lt;- stargazer::stargazer(logit_OLS, TSLS2, </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 type = &quot;latex&quot;, </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 out = demand_estimation_filename,</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 title = &quot;Estimation Results&quot;,</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 style = &quot;default&quot;,</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 no.space = T, </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 omit.stat=c(&quot;f&quot;,&quot;ser&quot;), </span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 column.labels = c(&quot;OLS&quot;, &quot;IV&quot;))</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Finally we get utility parameters</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># logitpar &lt;- logit10$coefficients</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># IVpar &lt;- IVreg$coefficients</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co"># IVpar2 &lt;- IVreg2$coefficients</span></span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

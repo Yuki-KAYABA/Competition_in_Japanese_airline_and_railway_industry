@@ -1,0 +1,14 @@
+%latex.default(coef, file = "Estimation_results2.tex", caption = "Estimation Results",     where = "h", col.just = rep("r", dim(coef)[2]))%
+\begin{table}[h]
+\caption{Estimation Results\label{coef}} 
+\begin{center}
+\begin{tabular}{lrrrrr}
+\hline\hline
+\multicolumn{1}{l}{coef}&\multicolumn{1}{c}{intercept}&\multicolumn{1}{c}{price}&\multicolumn{1}{c}{log(frequency)}&\multicolumn{1}{c}{acceessibility}&\multicolumn{1}{c}{railwaydummy}\tabularnewline
+\hline
+OLS&1.4962&-0.0004&0.6485&-0.0393&6.6077\tabularnewline
+IV&3.9594&-0.0006&0.6813&-0.0421&5.6476\tabularnewline
+IV2&2.7524&-0.0005&0.6652&-0.0407&6.1181\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}

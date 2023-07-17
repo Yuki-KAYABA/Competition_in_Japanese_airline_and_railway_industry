@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Master_Thesis_Simulation</title>
+  <meta name="description" content="Master_Thesis_Simulation" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Master_Thesis_Simulation" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Master_Thesis_Simulation" />
+  
+  
+  
+
+<meta name="author" content="Yuki KAYABA" />
+
+
+<meta name="date" content="2023-06-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="0.1" data-path=""><a href="#functions"><i class="fa fa-check"></i><b>0.1</b> Functions</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Master_Thesis_Simulation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Master_Thesis_Simulation</h1>
+<p class="author"><em>Yuki KAYABA</em></p>
+<p class="date"><em>2023-06-26</em></p>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Demand Parameters</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>parameter <span class="ot">&lt;-</span> IVreg<span class="sc">$</span>coefficients</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## New data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df_sim <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Data/Main/data_updated.csv&quot;</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">header =</span> T, <span class="at">fileEncoding =</span> <span class="st">&quot;shift-JIS&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Attach new airlineNo</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>N_airline <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>airlineNo <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>N_airline)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>airlinenames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;JAL&quot;</span>, <span class="st">&quot;ANA&quot;</span>, <span class="st">&quot;SFJ&quot;</span>, <span class="st">&quot;SKY&quot;</span>, <span class="st">&quot;JAC&quot;</span>, <span class="st">&quot;ADO&quot;</span>, <span class="st">&quot;IBX&quot;</span>, <span class="st">&quot;JTA&quot;</span>, <span class="st">&quot;HAC&quot;</span>, <span class="st">&quot;JEX&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>airline_correspondence <span class="ot">&lt;-</span> <span class="fu">cbind</span>(airlineNo, airlinenames) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">airlineNo =</span> <span class="fu">as.numeric</span>(airlineNo))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_sim <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(airline_correspondence, </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;航空会社&quot;</span> <span class="ot">=</span> <span class="st">&quot;airlinenames&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">airlineNo =</span> <span class="dv">0</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Prepare adjustment parameter alpha</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">### Revise Later</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>calculate.alpha <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;&lt;-</span> x <span class="sc">%*%</span> <span class="fu">t</span>(y) <span class="sc">-</span> <span class="fu">diag</span>(y)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  L <span class="ot">&lt;&lt;-</span> X</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  L[<span class="fu">upper.tri</span>(L)] <span class="ot">&lt;&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  U <span class="ot">&lt;&lt;-</span> X</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  U[<span class="fu">lower.tri</span>(U, <span class="at">diag =</span> T)] <span class="ot">&lt;&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  iteration <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  xx <span class="ot">&lt;&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(x)), <span class="at">nrow =</span> <span class="fu">length</span>(x), <span class="at">ncol =</span> <span class="dv">1</span>) <span class="do">## Initial value</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iteration){</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    xx <span class="ot">&lt;&lt;-</span> (<span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">solve</span>(L) <span class="sc">%*%</span> U <span class="sc">%*%</span> xx</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;&lt;-</span> xx[, <span class="dv">1</span>]<span class="sc">/</span>xx[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Add alpha</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>df_sim <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replace NAs in Freq with 1</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">Freq =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate Mean Utility</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">utility =</span> </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                  parameter[<span class="dv">1</span>]</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">2</span>] <span class="sc">*</span> 費用 </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">3</span>] <span class="sc">*</span> <span class="fu">log</span>(Freq)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">4</span>] <span class="sc">*</span> アクセシビリティ</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">5</span>] <span class="sc">*</span> 鉄道ダミー</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">6</span>] <span class="sc">*</span> 一便あたり座席数</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">7</span>] <span class="sc">*</span> 一便あたり貨物</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> parameter[<span class="dv">8</span>] <span class="sc">*</span> 所要時間,</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                <span class="at">exputility =</span> <span class="fu">exp</span>(utility)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Add alpha</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(i, j) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">alpha =</span> <span class="fu">calculate.alpha</span>(observedprob, exputility)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span></code></pre></div>
+<div id="functions" class="section level2 hasAnchor" number="0.1">
+<h2><span class="header-section-number">0.1</span> Functions<a href="#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We write some functions to simulate optimal prices set by each airline.</p>
+<ul>
+<li><code>adjusted_choice_probability</code> calculates logit choice probability which allows adjustments so that initial choice probability can be the same as actual choice probability.</li>
+<li><code>calculate_frequency</code> returns flight frequency that matches calculated demand. This function calculates <span class="math inline">\(Freq_{k} = \frac{d_{k}}{LF_{k}Seat_{k}}\)</span>.</li>
+<li><code>objective</code> calculates the profit of an airline under certain levels of prices of each route. This function is used as the objective function of each airline’s profit maximization.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate Adjusted Choice Probability</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>adjusted_choice_probability <span class="ot">&lt;-</span> <span class="cf">function</span>(df, parameter, alpha_flg){</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">exp_utility =</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(alpha_flg <span class="sc">==</span> <span class="dv">1</span>, alpha, <span class="dv">1</span>) <span class="sc">*</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">exp</span>(parameter[<span class="dv">1</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">2</span>] <span class="sc">*</span> p</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">3</span>] <span class="sc">*</span> <span class="fu">log</span>(f)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">4</span>] <span class="sc">*</span> アクセシビリティ</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">5</span>] <span class="sc">*</span> 鉄道ダミー</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">6</span>] <span class="sc">*</span> 一便あたり座席数</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">7</span>] <span class="sc">*</span> 一便あたり貨物</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                        <span class="sc">+</span> parameter[<span class="dv">8</span>] <span class="sc">*</span> 所要時間)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(i, j) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sum_exp_utility =</span> <span class="fu">sum</span>(exp_utility)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">adjusted_choice_probability =</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                    exp_utility <span class="sc">/</span> sum_exp_utility)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate Frequency</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>calculate_frequency <span class="ot">&lt;-</span> <span class="cf">function</span>(df, parameter, alpha_flg, n){</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">adjusted_choice_probability</span>(parameter, alpha_flg) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">f_renewal =</span> </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(airlineNo <span class="sc">==</span> n,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                           OD <span class="sc">*</span> adjusted_choice_probability <span class="sc">/</span> (Seat <span class="sc">*</span> LF <span class="sc">/</span> <span class="dv">100</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                           f),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                  <span class="at">f_renewal =</span> </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(f_renewal <span class="sc">&lt;</span> <span class="dv">1</span>, <span class="dv">1</span>, f_renewal))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="do">## Objective Function for Profit Maximization</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>objective <span class="ot">&lt;-</span> <span class="cf">function</span>(objective_price, df, parameter, alpha_flg, n){</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">ifelse</span>(airlineNo <span class="sc">==</span> n,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                             objective_price, </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>                             p)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">adjusted_choice_probability</span>(parameter, alpha_flg) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(airlineNo <span class="sc">==</span> n) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">profit =</span> (p <span class="sc">-</span> MC) <span class="sc">*</span> OD <span class="sc">*</span> adjusted_choice_probability)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">$</span>profit)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Define vectors of endogenous variables called Price and Frequency</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Price &lt;- as.numeric(df_sim$費用/2) # ここ要検討。JRまで2で割ってよいのか</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_sim<span class="sc">$</span>費用)<span class="co"># ここ要検討。JRまで2で割ってよいのか</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_sim<span class="sc">$</span>Freq)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>alpha_flg <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>count.price <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>count.profit <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df_sim <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">ifelse</span>(airlineNo <span class="sc">==</span> <span class="dv">0</span>, 費用, 費用<span class="sc">/</span><span class="dv">2</span>), </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">f =</span> Freq)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>objective_price <span class="ot">&lt;-</span> df_sim<span class="sc">$</span>p</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>Frequency <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_sim<span class="sc">$</span>Freq) <span class="co"># ここ書き換えた</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>Frequency <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Frequency), <span class="dv">1</span>, Frequency)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>Pricerenewal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">nrow</span>(df_sim)))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>Frequencyrenewal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">nrow</span>(df_sim)))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>Demand <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_sim<span class="sc">$</span>旅客数) <span class="do">## ここ書き換えた（また書き換えた）</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Profit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N_airline))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>Profitrenewal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N_airline))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Matrics</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>Frequency.matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>, <span class="at">ncol =</span> <span class="fu">nrow</span>(df_sim)) </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>Frequency.matrix[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> Frequency</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>Price.matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>, <span class="at">ncol =</span> <span class="fu">nrow</span>(df_sim))</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>Price.matrix[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> df_sim<span class="sc">$</span>p</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>Profit.matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>, <span class="at">ncol =</span> N_airline) <span class="do">## 参入数</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Set the numbers of iteration</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>it2 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>it3 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="do">## Stopping criteria</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>distance3 <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>iter3 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(distance3 <span class="sc">&gt;</span> <span class="fl">1e-4</span> <span class="sc">&amp;</span> iter3 <span class="sc">&lt;</span> it3){</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_airline){</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Optimization</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Stopping criteria for calculating frequency</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>      distance2 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>      iter2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span>(((distance2 <span class="sc">&gt;</span> <span class="fl">1e-4</span>) <span class="sc">&amp;</span> (iter2 <span class="sc">&lt;</span> it2)) <span class="sc">|</span> (iter2 <span class="sc">&lt;</span> <span class="dv">3</span>)){</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        <span class="do">## Stopping criteria for calculating frequency</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>        distance <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        iter <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate Frequency</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span>((distance <span class="sc">&gt;</span> <span class="fl">1e-4</span> <span class="sc">&amp;</span> iter <span class="sc">&lt;</span> it)){</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>          df_sim <span class="ot">&lt;-</span> <span class="fu">calculate_frequency</span>(df_sim, parameter, alpha_flg, n)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>          distance <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(df_sim<span class="sc">$</span>f <span class="sc">-</span> df_sim<span class="sc">$</span>f_renewal)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>          <span class="do">## Update Frequency</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>          df_sim <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">f =</span> f_renewal)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>          <span class="do">## Count</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>          Frequency.matrix[count <span class="sc">+</span> <span class="dv">1</span>, ] <span class="ot">&lt;-</span> Frequencyrenewal</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>          <span class="co"># print(paste(&quot;iter:&quot;, iter))</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>          <span class="co"># print(paste(&quot;distance&quot;, distance))</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>          <span class="co"># print(paste(&quot;count&quot;, count))</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>          iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>          count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Calculate Price</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>      profit.maximization <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="at">par =</span> objective_price, </span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fn =</span> objective, </span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">control =</span> <span class="fu">list</span>(<span class="at">fnscale =</span> <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">df =</span> df_sim, </span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">parameter =</span> parameter,</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">alpha_flg =</span> alpha_flg, </span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">n =</span> n)</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Renewal Price</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>      df_sim <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">ifelse</span>(airlineNo <span class="sc">==</span> n,</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>                                 profit.maximization<span class="sc">$</span>par,</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>                                 p)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>        <span class="fu">adjusted_choice_probability</span>(parameter, alpha_flg)</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>      price_renewal <span class="ot">&lt;-</span> df_sim<span class="sc">$</span>p</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>      distance2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(price_renewal <span class="sc">-</span> price)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>      price <span class="ot">&lt;-</span> price_renewal</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>      objective_price <span class="ot">&lt;-</span> price_renewal      </span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>      Profitrenewal <span class="ot">&lt;-</span> profit.maximization<span class="sc">$</span>value</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>      <span class="co"># print(price_renewal)</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>      <span class="co"># print(price)</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>      <span class="co"># print(price_renewal - price)</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>      <span class="co"># print(paste(&quot;profit:&quot;, Profitrenewal))</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>      <span class="co"># print(paste(&quot;price:&quot;, price_renewal[1:10]))</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;iter2:&quot;</span>, iter2))</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;distance2:&quot;</span>, distance2))</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>      iter2 <span class="ot">&lt;-</span> iter2 <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>      count.price <span class="ot">&lt;-</span> count.price <span class="sc">+</span> <span class="dv">1</span>    </span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;n:&quot;</span>, n))</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    Profit.matrix[count.profit, ] <span class="ot">&lt;-</span> Profitrenewal</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>    distance3 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((Profitrenewal <span class="sc">-</span> Profit)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;iter3:&quot;</span>, iter3))</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;distance3&quot;</span>, distance3))</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;count.profit&quot;</span>, count.profit))</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>    Profit <span class="ot">&lt;-</span> Profitrenewal</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>    iter3 <span class="ot">&lt;-</span> iter3 <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>    count.profit <span class="ot">&lt;-</span> count.profit <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>Frequency.matrix <span class="ot">&lt;-</span> Frequency.matrix[<span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>(count))), ]</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>Price.matrix <span class="ot">&lt;-</span> Price.matrix[<span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>(count.price))), ]</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>Profit.matrix <span class="ot">&lt;-</span> Profit.matrix[<span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>(count.profit <span class="sc">-</span> <span class="dv">1</span>))), ]</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>Demand <span class="ot">&lt;-</span> <span class="fu">unlist</span>(Demand)</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>simulation.results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Price_simulation =</span> Price, <span class="at">Price_observed =</span> df_sim<span class="sc">$</span>費用, </span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">Frequency_simulation =</span> Frequency, <span class="at">Frequency_observed =</span> df_sim<span class="sc">$</span>Freq, </span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">Probability_simulation =</span> Pr, <span class="at">Probability_observed =</span> df_sim<span class="sc">$</span>observedprob, </span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">Demand_simulation =</span> Demand, <span class="at">Demand_observed =</span> df_sim<span class="sc">$</span>旅客数)</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>simulation.results <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_sim[ , <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)], simulation.results)</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>simulation.results<span class="sc">$</span>Price_observed <span class="ot">&lt;-</span> simulation.results<span class="sc">$</span>Price_observed<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>simulation.results<span class="sc">$</span>Demand_simulation[<span class="fu">c</span>(<span class="fu">which</span>(simulation.results<span class="sc">$</span>航空会社 <span class="sc">==</span> <span class="st">&quot;JR&quot;</span>))] <span class="ot">&lt;-</span> simulation.results<span class="sc">$</span>Demand_observed[<span class="fu">c</span>(<span class="fu">which</span>(simulation.results<span class="sc">$</span>航空会社 <span class="sc">==</span> <span class="st">&quot;JR&quot;</span>))]<span class="sc">*</span>simulation.results<span class="sc">$</span>Probability_simulation[<span class="fu">c</span>(<span class="fu">which</span>(simulation.results<span class="sc">$</span>航空会社 <span class="sc">==</span> <span class="st">&quot;JR&quot;</span>))]<span class="sc">/</span>simulation.results<span class="sc">$</span>Probability_observed[<span class="fu">c</span>(<span class="fu">which</span>(simulation.results<span class="sc">$</span>航空会社 <span class="sc">==</span> <span class="st">&quot;JR&quot;</span>))] </span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(simulation.results, <span class="st">&quot;C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/simulation_results.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Write some functions</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot Frequency</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Frequency.series <span class="ot">&lt;-</span> <span class="cf">function</span>(xi, xj){ <span class="do">## nがエアラインNo, (i, j)が地域, 0で指定なし</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> Frequency.matrix</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span>  x[, <span class="fu">c</span>(<span class="fu">which</span>(df_sim<span class="sc">$</span>i <span class="sc">==</span> xi <span class="sc">&amp;</span> df_sim<span class="sc">$</span>j <span class="sc">==</span> xj))] <span class="co"># 直す</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(x)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;route&quot;</span>, <span class="st">&quot;frequency&quot;</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(y, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> count, <span class="at">y =</span> frequency, <span class="at">color =</span> <span class="fu">as.factor</span>(route)))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">geom_line</span>()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggsci<span class="sc">::</span><span class="fu">scale_color_nejm</span>()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;航空便数 &quot;</span>, xi, <span class="st">&quot;-&quot;</span>, xj, <span class="st">&quot;.png&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="fu">plot</span>(graph))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## paste(i, j, sep = &quot;-&quot;)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot Price</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>Price.series <span class="ot">&lt;-</span> <span class="cf">function</span>(xi, xj){ <span class="do">## nがエアラインNo, (i, j)が地域, 0で指定なし</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> Price.matrix</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span>  x[, <span class="fu">c</span>(<span class="fu">which</span>(df_sim<span class="sc">$</span>i <span class="sc">==</span> xi <span class="sc">&amp;</span> df_sim<span class="sc">$</span>j <span class="sc">==</span> xj))] <span class="co"># 直す</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(x)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;route&quot;</span>, <span class="st">&quot;price&quot;</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(y, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> count, <span class="at">y =</span> price, <span class="at">color =</span> <span class="fu">as.factor</span>(route)))</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">geom_line</span>()</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggsci<span class="sc">::</span><span class="fu">scale_color_nejm</span>()</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;運賃 &quot;</span>, xi, <span class="st">&quot;-&quot;</span>, xj, <span class="st">&quot;.png&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="fu">plot</span>(graph))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Profit</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>Profit.series <span class="ot">&lt;-</span> <span class="cf">function</span>(n){ <span class="do">## nに何入れようが関係ない</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> Profit.matrix</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(x)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;airline&quot;</span>, <span class="st">&quot;profit&quot;</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(y, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> count, <span class="at">y =</span> profit, <span class="at">color =</span> <span class="fu">as.factor</span>(airline)))</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggplot2<span class="sc">::</span><span class="fu">geom_line</span>()</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  graph <span class="ot">&lt;-</span> graph <span class="sc">+</span> ggsci<span class="sc">::</span><span class="fu">scale_color_nejm</span>()</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="at">file =</span> <span class="st">&quot;利潤.png&quot;</span>, <span class="fu">plot</span>(graph))</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Substitution matrix</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>Price.Substitution.Matrix <span class="ot">&lt;-</span> <span class="cf">function</span>(xi, xj){</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(magrittr)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(i <span class="sc">==</span> xi, j <span class="sc">==</span> xj) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">prob2 =</span> <span class="dv">1</span> <span class="sc">-</span> observedprob)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  xx <span class="ot">&lt;-</span> <span class="sc">-</span>par[<span class="dv">2</span>]<span class="sc">*</span><span class="fu">t</span>(x<span class="sc">$</span>費用<span class="sc">*</span>x<span class="sc">$</span>observedprob)</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="fu">ncol</span>(xx), <span class="at">ncol =</span> <span class="fu">ncol</span>(xx))</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x)){</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    mat[i, ] <span class="ot">&lt;-</span> xx</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> par[<span class="dv">2</span>]<span class="sc">*</span>(x<span class="sc">$</span>費用<span class="sc">*</span>x<span class="sc">$</span>prob2)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> mat</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="fu">Price.Substitution.Matrix</span>(<span class="dv">25</span>, <span class="dv">37</span>)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>Frequency.Substitution.Matrix <span class="ot">&lt;-</span> <span class="cf">function</span>(xi, xj){</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(magrittr)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> df_sim <span class="sc">%&gt;%</span> </span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(i <span class="sc">==</span> xi, j <span class="sc">==</span> xj) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">prob2 =</span> <span class="dv">1</span> <span class="sc">-</span> observedprob)</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  xx <span class="ot">&lt;-</span> <span class="sc">-</span>par[<span class="dv">3</span>]<span class="sc">*</span><span class="fu">as.matrix</span>(x<span class="sc">$</span>observedprob)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  xx <span class="ot">&lt;-</span> <span class="fu">t</span>(xx)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="fu">ncol</span>(xx), <span class="at">ncol =</span> <span class="fu">ncol</span>(xx))</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x)){</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    mat[i, ] <span class="ot">&lt;-</span> xx</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> par[<span class="dv">3</span>]<span class="sc">*</span>x<span class="sc">$</span>prob2</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> mat</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="fu">Frequency.Substitution.Matrix</span>(<span class="dv">18</span>, <span class="dv">37</span>)</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="do">## index</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_sim, , <span class="fu">c</span>(i, j)) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>() </span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="do">## save graph</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(index)){</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Frequency.series</span>(<span class="fu">as.numeric</span>(index[k, <span class="dv">1</span>]), <span class="fu">as.numeric</span>(index[k, <span class="dv">2</span>]))</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Price.series</span>(<span class="fu">as.numeric</span>(index[k, <span class="dv">1</span>]), <span class="fu">as.numeric</span>(index[k, <span class="dv">2</span>]))</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="fu">Profit.series</span>(<span class="dv">0</span>)</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co">#profit.counterfactual &lt;- data.frame(Airline = airlinenames2, Profit = Profit)</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co">#write.csv(profit.counterfactual, &quot;C:/Users/kayab/yuki/大学講義/大学院ゼミ/Data/Results/profit_counterfactual.csv&quot;)</span></span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+optim(JALsimulation$費用, profit, control = list(fnscale = -1))
+
+JALoptim <- constrOptim(theta = JALsimulation$費用, f = profit, ui = diag(nrow(JALsimulation)), ci = rep(0, nrow(JALsimulation)), 
+            method = "Nelder-Mead", control = list(fnscale = -1))
+
+
+
+## Profit maximization
+partialderivself <- function(a){
+  exputility <- rep(0, nrow(data3))
+  sumexputility <- rep(0, nrow(data3))
+  Frequency <- ifelse(Frequency == 0, 1e-4, Frequency)
+  for(k in 1:nrow(data3)){
+    exputility[k] <- (a*exp(utilitypar[1] + utilitypar[2]*data3$所要時間[k] + utilitypar[3]*Price[k]
+                            + utilitypar[4]*log(Frequency[k]) + utilitypar[5]*data3$滞在可能時間[k]
+                            + utilitypar[6]*data3$アクセシビリティ[k] + utilitypar[7]*data3$鉄道ダミー[k]
+                            + utilitypar[8]*data3$エアライン参入数[k]))
+  }
+  sumexputility <- data.frame(i = data3$i, j = data3$j, exputility = exputility)
+  sumexputility <- sumexputility %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sumexputility = sum(exputility)) %>% 
+    dplyr::ungroup()
+  output <- (utilitypar[3]*exputility*(sumexputility - exputility))/(sumexputility)^2
+  return(output)
+}
+
+
+
+
+partialderivself <- function(a){
+  exputility <- rep(0, nrow(data3))
+  sumexputility <- rep(0, nrow(data3))
+  Frequency <- ifelse(Frequency == 0, 1e-4, Frequency)
+  for(k in 1:nrow(data3)){
+    exputility[k] <- (a*exp(utilitypar[1] + utilitypar[2]*data3$所要時間[k] + utilitypar[3]*Price[k]
+                            + utilitypar[4]*log(Frequency[k]) + utilitypar[5]*data3$滞在可能時間[k]
+                            + utilitypar[6]*data3$アクセシビリティ[k] + utilitypar[7]*data3$鉄道ダミー[k]
+                            + utilitypar[8]*data3$エアライン参入数[k]))
+  }
+  sumexputility <- data.frame(i = data3$i, j = data3$j, exputility = exputility)
+  sumexputility <- sumexputility %>% 
+    dplyr::group_by(i, j) %>% 
+    dplyr::mutate(sumexputility = sum(exputility)) %>% 
+    dplyr::ungroup()
+  output <- matrix(0, nrow = nrow(data3), ncol = nrow(data3)))
+  for(i in 1:nrow(data3)){
+    for(j in 1:nrow(data3)){
+      if(data3[i, 1] == data3[j, 1] && data3[i, 2] == data3[j, 2] && data3[i, 5] == data3[j, 5]){
+        output[i, j] <- (-1)*(utilitypar[3]*exputility[i]*exputility[j])/(sumexputility[i])^2
+      } else {
+        
+      }
+    }
+  }
+  for(i in 1:nrow(data3)){
+    output[i, i] <- (utilitypar[3]*exputility[i]*(sumexputility[i] - exputility[i]))/(sumexputility[i])^2
+  }
+  return(output)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
